@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="test.Item">
+
+	<class name="test.Item" table="ITEM">
+		<id name="id" >
+			<column name="item_id" />
+			<generator class="identity" />
+		</id>
+		
+		<property name="price"/>
+
+		<set name="carts" table="CART_ITEMS" fetch="select" cascade="all">
+			<key column="item_id" />  <!-- for one item can be placed in many carts or multiple carts -->
+			<many-to-many class="test.Cart" column="cart_id" />
+		</set>
+
+	</class>
+
+</hibernate-mapping>
